@@ -3,7 +3,16 @@ import { PORT } from "./env.js"
 
 const app = express()
 
-app.get("/",(req,res)=>res.send("<h1>hello word </h1>"))
+app.get("/",(req,res)=>{
+// console.log(__dirname)
+// console.log(__filename)
+// console.log(import.meta.dirname) 
+// console.log(import.meta.url)
+const __filename = new URL(import.meta.url)
+console.log(__filename.pathname) 
+
+res.send("hii")
+})
 
 app.get("/about",(req,res)=>res.send("<h2>hello this is me the about page 1 </h2>"))
 
