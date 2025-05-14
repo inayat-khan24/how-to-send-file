@@ -1,5 +1,6 @@
 import express from "express"
 import { PORT } from "./env.js"
+import path from "path"
 
 const app = express()
 
@@ -8,10 +9,12 @@ app.get("/",(req,res)=>{
 // console.log(__filename)
 // console.log(import.meta.dirname) 
 // console.log(import.meta.url)
-const __filename = new URL(import.meta.url)
-console.log(__filename.pathname) 
+// const __filename = new URL(import.meta.url)
+// console.log(__filename.pathname) 
 
-res.send("hii")
+const homePagePath = path.join(import.meta.dirname,"public","index.html")
+
+res.sendFile(homePagePath)
 })
 
 app.get("/about",(req,res)=>res.send("<h2>hello this is me the about page 1 </h2>"))
