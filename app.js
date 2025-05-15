@@ -11,8 +11,22 @@ const app = express()
 const staticPath = path.join(import.meta.dirname,"public")
 app.use(express.static(staticPath));
 
-app.get("/contact",(req,res)=>{
-    console.log(req.query)
+
+// ============
+// with GEt method
+// ============
+// app.get("/contact",(req,res)=>{
+//     console.log(req.query)
+//     res.redirect("/")
+
+// })
+
+// ================
+// with POST method
+// =================
+
+app.post("/contact",(req,res)=>{
+    console.log(req.body)
     res.redirect("/")
 
 })
