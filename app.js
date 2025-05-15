@@ -14,8 +14,9 @@ app.use("/public",express.static(staticPath));
 
 
 
-app.get("/",(req,res)=>{
-
+app.get("/profile/:username",(req,res)=>{
+ console.log(req.params)
+ res.send(`hello how are you? ${req.params.username}`)
 })
 
 app.get("/about",(req,res)=>res.send("<h2>hello this is me the about page 1 </h2>"))
