@@ -11,6 +11,9 @@ const app = express()
 const staticPath = path.join(import.meta.dirname,"public")
 app.use("/public",express.static(staticPath));
 
+app.get("/product",(req,res)=>{
+
+})
 
 
 
