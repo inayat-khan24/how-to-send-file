@@ -11,6 +11,7 @@ const app = express()
 const staticPath = path.join(import.meta.dirname,"public")
 app.use(express.static(staticPath));
 
+// middleware 
 app.use(express.urlencoded({extended:true}))
 
 // ============
@@ -31,6 +32,12 @@ app.post("/contact", (req, res) => {
     console.log(req.body);     // ✔️ Correct: will log form data
     res.redirect("/");
 });
+
+
+app.use((req,res)=>{
+return res.status(404).send(`<h1> page not found </h1>`)
+
+})
 
 // const PORT = process.env.PORT || 3000;
 app.listen(PORT,()=>{
