@@ -12,7 +12,8 @@ const staticPath = path.join(import.meta.dirname,"public")
 app.use("/public",express.static(staticPath));
 
 app.get("/product",(req,res)=>{
-
+console.log(req.query)
+res.send(`<h2>user search for product</h2> <h1>${req.query.search}</h1>`)
 })
 
 
