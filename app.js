@@ -16,7 +16,12 @@ app.use("/public",express.static(staticPath));
 
 app.get("/profile/:username",(req,res)=>{
  console.log(req.params)
- res.send(`hello how are you? ${req.params.username}`)
+ res.send(`<h1>hello how are you? ${req.params.username}</h1>`)
+})
+
+app.get("/profile/:username/artical/:slug",(req,res)=>{
+ console.log(req.params)
+ res.send(`<h1>hello how are you? ${req.params.username} by ${req.params.slug}</h1>`)
 })
 
 app.get("/about",(req,res)=>res.send("<h2>hello this is me the about page 1 </h2>"))
