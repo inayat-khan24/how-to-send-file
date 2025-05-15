@@ -13,7 +13,9 @@ app.use("/public",express.static(staticPath));
 
 app.get("/product",(req,res)=>{
 console.log(req.query)
-res.send(`<h2>user search for product</h2> <h1>${req.query.search}</h1>`)
+// we use this api
+// "http://localhost:3000/product?search=apple&page=10"
+res.send(` <h1>user search for product ${req.query.page} ${req.query.limit}  mobile</h1>`)
 })
 
 
