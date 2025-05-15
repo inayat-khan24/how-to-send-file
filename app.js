@@ -12,6 +12,7 @@ const staticPath = path.join(import.meta.dirname,"public")
 app.use("/public",express.static(staticPath));
 
 
+
 // const PORT = process.env.PORT || 3000;
 app.listen(PORT,()=>{
     console.log(`server is running at port : ${PORT}`)
