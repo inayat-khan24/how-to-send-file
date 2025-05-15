@@ -9,9 +9,13 @@ const app = express()
 
 // absolute path
 const staticPath = path.join(import.meta.dirname,"public")
-app.use("/public",express.static(staticPath));
+app.use(express.static(staticPath));
 
+app.get("/contact",(req,res)=>{
+    console.log(req.query)
+    res.redirect("/")
 
+})
 
 // const PORT = process.env.PORT || 3000;
 app.listen(PORT,()=>{
