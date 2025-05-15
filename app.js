@@ -11,6 +11,7 @@ const app = express()
 const staticPath = path.join(import.meta.dirname,"public")
 app.use(express.static(staticPath));
 
+app.use(express.urlencoded({extended:true}))
 
 // ============
 // with GEt method
@@ -25,11 +26,11 @@ app.use(express.static(staticPath));
 // with POST method
 // =================
 
-app.post("/contact",(req,res)=>{
-    console.log(req.body)
-    res.redirect("/")
-
-})
+app.use(express.urlencoded()); // ✔️ Good: to parse form data (x-www-form-urlencoded)
+app.post("/contact", (req, res) => {
+    console.log(req.body);     // ✔️ Correct: will log form data
+    res.redirect("/");
+});
 
 // const PORT = process.env.PORT || 3000;
 app.listen(PORT,()=>{
