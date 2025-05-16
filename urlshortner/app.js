@@ -43,13 +43,13 @@ try {
   const content = file.toString().replaceAll("{{shorten_urls}}",
     Object.entries(links).map(
         ([shortCode,url])=>
-            `<li> <a href="/${shortCode}" target="_blank" class="text-gray-700"> ${req.host}/${shortCode}</a> - ${url} </li>`
+            `<li> <a href="/${shortCode}" target="_blank" class="text-blue-700"> ${req.host}/${shortCode}</a> - ${url} </li>`
     ).join("")
 );
 return res.send(content)
 
 } catch (error) {
-    console.error(err)
+    console.error(or)
     return res.status(500).send("Internal Server error")
 }
 })
@@ -60,6 +60,7 @@ app.post("/",async (req,res)=>{
 try {
    const {url,shortCode} = req.body 
    const finalShortcode = shortCode || crypto.randomBytes(4).toString("hex")
+   const links = await loadLinks();  
     if(links[finalShortcode]){
         return res.status(400).send("Short code already exists. please choose another.");
     }
@@ -69,7 +70,8 @@ try {
   return res.redirect("/")       
    
 } catch (error) {
-    
+    console.error(error)
+    return res.status(500).send("Internal server error")
 }
 })
 
@@ -81,7 +83,7 @@ try {
     return res.redirect(links[shortCode])
   
 } catch (error) {
-    console.error(err)
+    console.error(error)
     return res.status(500).send("Internal Server error")
 }
 })
