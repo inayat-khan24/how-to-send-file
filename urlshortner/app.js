@@ -44,7 +44,19 @@ try {
 
 // use post method with express
 app.post("/",async (req,res)=>{
-
+try {
+   const {url,shortCode} = req.body 
+   const finalShortcode = shortCode || crypto.randomBytes(4).toString("hex")
+    if(links[finalShortcode]){
+        return res.status(400).send("Short code already exists. please choose another.");
+    }
+   
+    links[finalShortcode] = url
+  await saveLinks(links)        
+   
+} catch (error) {
+    
+}
 })
 
 
@@ -65,30 +77,7 @@ try {
     res.writeHead(200,{"content-type":"application/json"})
     return res.end(JSON.stringify(links))
 }
-else if (req.method === "POST" && req.url === "/shorten"){
-    const links = await loadLinks()
-let body = ""
-req.on("data",(chunk)=>(body += chunk))
-req.on("end",async()=>{
-    console.log(body)
-    const {url,shortCode} = JSON.parse(body)
-    if(!url){
-        res.writeHead(400,{"content-type":"text/plain"})
-        return res.end("URL is required")
-    }
-    const finalShortcode = shortCode || crypto.randomBytes(4).toString("hex")
-    if(links[finalShortcode]){
-        res.writeHead(400,{"content-type":"text/plain"})
-        return res.end("Short code already exist. please choose another.")
-    }
-    links[finalShortcode] = url;
-    await saveLinks(links);
 
-    res.writeHead(200,{"content-type":"application/json"})
-    res.end(JSON.stringify({success:true, shortCode:finalShortcode}))
-    
-})
-}
 
 })
 
