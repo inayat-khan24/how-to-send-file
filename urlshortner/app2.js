@@ -43,7 +43,7 @@ try {
   const content = file.toString().replaceAll("{{shorten_urls}}",
     Object.entries(links).map(
         ([shortCode,url])=>
-            `<li> <a href="/${shortCode}" target="_blank" class="text-gray-700"> ${req.host}/${shortCode}</a> - ${url} </li>`
+            `<li> <a href="/${shortCode}" target="_blank"> ${req.host}/${shortCode}</a> - ${url} </li>`
     ).join("")
 );
 return res.send(content)
